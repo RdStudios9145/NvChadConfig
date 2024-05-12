@@ -35,7 +35,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require "lua.configs.lspconfig"
+      require "configs.lspconfig"
     end,
   },
   {
@@ -44,7 +44,7 @@ return {
     ft = { "rust" },
     dependencies = "neovim/nvim-lspconfig",
     config = function ()
-      require "lua.configs.rustaceanvim"
+      require "configs.rustaceanvim"
     end
   },
   {
@@ -76,7 +76,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function()
-      local M = require "plugins.configs.cmp"
+      local M = require "neovim.configs.cmp"
       M.completion.completeopt = "menu,menuone,noselect"
       M.mapping["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Insert,

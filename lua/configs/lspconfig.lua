@@ -21,3 +21,11 @@ lspconfig.tsserver.setup {
   on_init = on_init,
   capabilities = capabilities,
 }
+
+local M = {
+  on_attach = on_attach,
+  on_init = on_init,
+  calabilities = capabilities,
+}
+
+return M
