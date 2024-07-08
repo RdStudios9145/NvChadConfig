@@ -59,11 +59,14 @@ return {
     config = function(_, opts)
       local crates  = require('crates')
       crates.setup(opts)
+
       require('cmp').setup.buffer({
         sources = { { name = "crates" }}
       })
+
       crates.show()
-      require("core.utils").load_mappings("crates")
+      -- require("core.utils").load_mappings("crates")
+      vim.keymap.set("n", "<leader>rcu", function() require("crates").upgrade_all_crates() end)
     end,
   },
   {
@@ -76,14 +79,49 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function()
-      local M = require "neovim.configs.cmp"
-      M.completion.completeopt = "menu,menuone,noselect"
-      M.mapping["<CR>"] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = false,
-      }
-      table.insert(M.sources, {name = "crates"})
+      local cmp = require "cmp"
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.snippet.expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        }),
+        sources = cmp.config.sources({
+          { name = "crates" },
+        }),
+      })
+
+      -- local M = require "neovim.configs.cmp"
+      -- M.completion.completeopt = "menu,menuone,noselect"
+      -- M.mapping["<CR>"] = cmp.mapping.confirm {
+      --   behavior = cmp.ConfirmBehavior.Insert,
+      --   select = false,
+      -- }
+      -- table.insert(M.sources, {name = "crates"})
       return M
+    end,
+  },
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+    lazy = false,
+    init = function()
+      vim.g.VM_maps = {
+        ["Add Cursor Down"] = '<M-j>',
+        ["Add Cursor Up"]   = '<M-k>',
+      }
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
     end,
   }
 
