@@ -17,6 +17,8 @@ else
   o.shell = "fish"
 end
 
-require('session_manager').setup({
-  autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
+o.mouse = ""
+
+vim.filetype.add({
+  pattern = { [".*/hypr/.*.conf"] = "hyprlang" }
 })

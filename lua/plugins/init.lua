@@ -3,7 +3,7 @@ local cmp = require("cmp")
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
@@ -49,9 +49,6 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    init = function()
-      -- require("core.utils").load_mappings("dap")
-    end
   },
   {
     'saecki/crates.nvim',
@@ -94,14 +91,6 @@ return {
           { name = "crates" },
         }),
       })
-
-      -- local M = require "neovim.configs.cmp"
-      -- M.completion.completeopt = "menu,menuone,noselect"
-      -- M.mapping["<CR>"] = cmp.mapping.confirm {
-      --   behavior = cmp.ConfirmBehavior.Insert,
-      --   select = false,
-      -- }
-      -- table.insert(M.sources, {name = "crates"})
       return M
     end,
   },
@@ -123,34 +112,15 @@ return {
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
+  },
+  {
+    "Shatur/neovim-session-manager",
+    lazy = false,
+    init = function()
+      local ses = require("session_manager")
+      ses.setup({
+        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
+      })
+    end
   }
-
-  -- These are some examples, uncomment them if you want to see them work!
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   config = function()
-  --     require("nvchad.configs.lspconfig").defaults()
-  --     require "configs.lspconfig"
-  --   end,
-  -- },
-  --
-  -- {
-  -- 	"williamboman/mason.nvim",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"lua-language-server", "stylua",
-  -- 			"html-lsp", "css-lsp" , "prettier"
-  -- 		},
-  -- 	},
-  -- },
-  --
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
 }
