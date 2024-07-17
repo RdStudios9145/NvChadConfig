@@ -23,6 +23,7 @@ return {
   },
   {
     "junegunn/fzf.vim",
+    lazy = false,
   },
   {
     "williamboman/mason.nvim",
