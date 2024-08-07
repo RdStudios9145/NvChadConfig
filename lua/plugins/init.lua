@@ -30,6 +30,7 @@ return {
     opts = {
       ensure_installed = {
         "rust-analyzer",
+        "zls"
       },
     },
   },
