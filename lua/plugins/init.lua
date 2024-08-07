@@ -53,7 +53,7 @@ return {
   },
   {
     'saecki/crates.nvim',
-    ft = {"toml"},
+    ft = { "toml" },
     config = function(_, opts)
       local crates  = require('crates')
       crates.setup(opts)
@@ -123,5 +123,9 @@ return {
         autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
       })
     end
+  },
+  {
+    "ziglang/zig.vim",
+    ft = { "zig" },
   }
 }
